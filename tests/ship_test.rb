@@ -21,7 +21,11 @@ class TestShip < Minitest::Test
   end
 
   def test_for_health
-    assert_equal 3, @new_ship.health 
+    assert_equal 3, @new_ship.health
+  end
+
+  def test_for_sunk
+    assert_equal false, @new_ship.sunk?
   end
 
 end

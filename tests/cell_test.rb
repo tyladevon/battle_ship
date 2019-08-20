@@ -17,4 +17,8 @@ class TestCell < Minitest::Test
   def test_for_coordinate
     assert_equal "B4", @cell.coordinate
   end
+
+  def test_if_ship_returns_nil
+    assert_nil @cell.ship 
+  end
 end

@@ -19,6 +19,10 @@ class TestCell < Minitest::Test
   end
 
   def test_if_ship_returns_nil
-    assert_nil @cell.ship 
+    assert_nil @cell.ship
   end
+
+  def test_cell_empty
+    assert_equal true, @cell.empty?
+  end 
 end

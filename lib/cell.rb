@@ -3,6 +3,13 @@ class Cell
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship 
+    @ship
+    @placement = {
+      @coordinate => @coordinate
+    }
+  end
+
+  def empty?
+    @placement.values[0] != @ship
   end
 end

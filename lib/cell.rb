@@ -4,12 +4,10 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
     @ship
-    @placement = {
-      @coordinate => @coordinate
-    }
+    @placement = Hash.new(0)
   end
 
   def empty?
-    @placement.values[0] != @ship
+    @placement[@coordinate] != @ship
   end
 end

@@ -20,4 +20,8 @@ class TestShip < Minitest::Test
     assert_equal 3, @new_ship.length
   end
 
+  def test_for_health
+    assert_equal 3, @new_ship.health 
+  end
+
 end

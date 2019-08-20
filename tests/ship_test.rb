@@ -28,4 +28,9 @@ class TestShip < Minitest::Test
     assert_equal false, @new_ship.sunk?
   end
 
+  def test_for_hit
+    @new_ship.hit
+    assert_equal 2, @new_ship.health 
+  end
+
 end

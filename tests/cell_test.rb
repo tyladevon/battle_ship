@@ -44,4 +44,12 @@ class TestCell < Minitest::Test
   def test_for_fired_upon
     assert_equal false, @cell.fired_upon?
   end
+
+  def test_for_fire_upon
+    @cell.place_ship(@ship)
+    @cell.fire_upon
+
+    assert_equal 2, @cell.ship.health
+    assert_equal true, @cell.fired_upon?
+  end
 end

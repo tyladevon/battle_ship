@@ -1,5 +1,5 @@
 class Cell
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :placement 
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -9,5 +9,10 @@ class Cell
 
   def empty?
     @placement[@coordinate] != @ship
+  end
+
+  def place_ship(ship)
+    @ship = ship
+    @placement[@coordinate] = @ship
   end
 end

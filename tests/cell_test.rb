@@ -34,4 +34,10 @@ class TestCell < Minitest::Test
 
     assert_instance_of Ship, @cell.placement[@cell.coordinate]
   end
+
+  def test_ship_takes_ship
+    @cell.place_ship(@ship)
+
+    assert_equal @ship, @cell.ship
+  end
 end

@@ -25,6 +25,8 @@ class TestCell < Minitest::Test
 
   def test_cell_empty
     assert_equal true, @cell.empty?
+    @cell.place_ship(@ship)
+    assert_equal false, @cell.empty?
   end
 
   def test_if_ship_is_placed

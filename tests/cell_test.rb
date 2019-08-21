@@ -8,6 +8,7 @@ class TestCell < Minitest::Test
 
   def setup
     @cell = Cell.new("B4")
+    @ship = Ship.new("Cruiser", 3)
   end
 
   def test_it_exists
@@ -24,5 +25,11 @@ class TestCell < Minitest::Test
 
   def test_cell_empty
     assert_equal true, @cell.empty?
-  end 
+  end
+
+  def test_if_ship_is_placed
+    @cell.place_ship(@ship)
+
+    assert_instance_of Ship, @cell.placement[@cell.coordinate]
+  end
 end

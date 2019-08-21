@@ -8,9 +8,8 @@ require 'minitest/pride'
 class TestBoard < Minitest::Test
 
   def setup
-    @cell = Cell.new("B4")
     @ship = Ship.new("Cruiser", 3)
-    @cell_2 = Cell.new("A1")
+    @ship_1 = Ship.new("Submarine", 2)
     @board = Board.new
   end
   def test_if_exists
@@ -28,5 +27,11 @@ class TestBoard < Minitest::Test
   def test_valid_coordinate
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal false, @board.valid_coordinate?("jty")
+  end
+
+  def test_valid_placement
+    assert_equal false, @board.valid_placement?(@ship, ["A1", "A2"])
+    assert_equal true, @board.valid_placement?(@ship_1, ["B3", "B4"])
+
   end
 end

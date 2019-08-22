@@ -30,7 +30,11 @@ class TestShip < Minitest::Test
 
   def test_for_hit
     @new_ship.hit
-    assert_equal 2, @new_ship.health 
+    assert_equal 2, @new_ship.health
+    @new_ship.hit
+    @new_ship.hit
+    @new_ship.hit
+    assert_equal 0, @new_ship.health
   end
 
 end

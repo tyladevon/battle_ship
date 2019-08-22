@@ -32,6 +32,5 @@ class TestBoard < Minitest::Test
   def test_valid_placement
     assert_equal false, @board.valid_placement?(@ship, ["A1", "A2"])
     assert_equal true, @board.valid_placement?(@ship_1, ["B3", "B4"])
-
   end
 end

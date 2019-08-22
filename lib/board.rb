@@ -25,4 +25,34 @@ class Board
     @cells.has_key?(placement)
   end
 
+  def array_ordered?(array_1, array_2)
+    checked_array1 = array_1.chunk_while{ |num1, num2|
+    num2 == num1 + 1}.to_a
+    checked_array2 = array_2.chunk_while{ |num1, num2|
+    num2 == num1 + 1}.to_a
+
+    if checked_array1.count == 1 && checked_array2.count == 1
+      false
+    elsif checked_array1[0] == array_1 && checked_array2[0] == array_2
+      true
+    elsif checked_array1.uniq.count == 1 && checked_array2[0] == array_2
+      true
+    else
+      false
+    end
+  end
+
+  def valid_placement?(ship, coordinates)
+    letters, nums = [], []
+    coordinates.each do |coordinate|
+      letters << coordinate.split(//)[0].ord
+      nums << coordinate.split(//)[1].to_i
+    end
+    check = array_ordered?(letters, nums)
+    if ship.length == coordinates.count && check == true
+      true
+    else
+      false
+    end
+  end
 end

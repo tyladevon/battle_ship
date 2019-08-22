@@ -48,7 +48,9 @@ class Board
       letters << coordinate.split(//)[0].ord
       nums << coordinate.split(//)[1].to_i
     end
+
     check = array_ordered?(letters, nums)
+
     if ship.length == coordinates.count && check == true
       true
     else
@@ -58,14 +60,19 @@ class Board
 
   def place(ship, coordinates)
     valid = []
+
     coordinates.map do |coordinate|
       valid << valid_coordinate?(coordinate)
     end
 
-    if valid.all? { |coordinate| coordinate == true} == true && valid_placement?(ship, coordinates) == true
+    is_valid_coordinates = valid.all? { |coordinate| coordinate == true}
+    is_valid_placement = valid_placement?(ship, coordinates)
+    doesnt_have_ship = coordinates.map {|coordinate| @cells[coordinate].ship.class != Ship}.uniq[0]
+
+    if is_valid_coordinates && is_valid_placement && doesnt_have_ship
       coordinates.each do |coordinate|
         @cells[coordinate].place_ship(ship)
-      end
+    end
     else
       "Invalid placement. Please try again."
     end

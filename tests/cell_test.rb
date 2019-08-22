@@ -33,7 +33,7 @@ class TestCell < Minitest::Test
   def test_if_ship_is_placed
     @cell.place_ship(@ship)
 
-    assert_instance_of Ship, @cell.placement[@cell.coordinate]
+    assert_instance_of Ship, @cell.ship
   end
 
   def test_ship_takes_ship
@@ -63,7 +63,7 @@ class TestCell < Minitest::Test
     assert_equal "S", @cell_2.render(true)
     @cell_2.fire_upon
     assert_equal "H", @cell_2.render
-    2.times{@cell_2.fire_upon}
+    2.times{@ship.hit}
     assert_equal "X", @cell_2.render
   end
 end

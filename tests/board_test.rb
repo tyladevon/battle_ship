@@ -11,6 +11,9 @@ class TestBoard < Minitest::Test
     @ship = Ship.new("Cruiser", 3)
     @ship_1 = Ship.new("Submarine", 2)
     @board = Board.new
+    @cell_1 = @board.cells["A1"]
+    @cell_2 = @board.cells["A2"]
+    @cell_3 = @board.cells["A3"]
   end
   def test_if_exists
     assert_instance_of Board, @board
@@ -35,5 +38,14 @@ class TestBoard < Minitest::Test
     assert_equal false, @board.valid_placement?(@ship, ["A1", "A2", "A4"])
     assert_equal false, @board.valid_placement?(@ship_1, ["A1", "C1"])
     assert_equal false, @board.valid_placement?(@ship, ["A1", "B2", "C3"])
+  end
+
+  def test_for_placed_ship
+    @board.place(@ship, ["A1", "A2", "A3"])
+
+    assert_equal @ship, @cell_1.ship
+    assert_equal @ship, @cell_2.ship
+    assert_equal @ship, @cell_3.ship
+    assert_equal "Invalid placement. Please try again.", @board.place(@ship, ["A1", "A2", "A6"])
   end
 end

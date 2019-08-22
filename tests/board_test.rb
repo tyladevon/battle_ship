@@ -47,5 +47,6 @@ class TestBoard < Minitest::Test
     assert_equal @ship, @cell_2.ship
     assert_equal @ship, @cell_3.ship
     assert_equal "Invalid placement. Please try again.", @board.place(@ship, ["A1", "A2", "A6"])
+    assert_equal "Invalid placement. Please try again.", @board.place(@ship_1, ["A1", "A2"])
   end
 end

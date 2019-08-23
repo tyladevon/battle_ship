@@ -9,8 +9,7 @@ class Cell
   end
 
   def empty?
-    @ship
-  end
+    @ship.class != Ship 
 
   def place_ship(ship)
     @ship = ship

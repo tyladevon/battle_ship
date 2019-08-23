@@ -21,8 +21,8 @@ class Board
     }
   end
 
-  def valid_coordinate?(placement)
-    @cells.has_key?(placement)
+  def valid_coordinate?(coordinate)
+    @cells.has_key?(coordinate)
   end
 
   def array_ordered?(array_1, array_2)
@@ -53,6 +53,21 @@ class Board
       true
     else
       false
+    end
+  end
+
+  def place(ship, coordinates)
+    valid = []
+    coordinates.map do |coordinate|
+      valid << valid_coordinate?(coordinate)
+    end
+
+    if valid.all? { |coordinate| coordinate == true} == true && valid_placement?(ship, coordinates) == true
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    else
+      "Invalid placement. Please try again."
     end
   end
 end

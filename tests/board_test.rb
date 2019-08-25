@@ -47,5 +47,13 @@ class TestBoard < Minitest::Test
     assert_equal @ship, @cell_2.ship
     assert_equal @ship, @cell_3.ship
     assert_equal "Invalid placement. Please try again.", @board.place(@ship, ["A1", "A2", "A6"])
+    assert_equal "Invalid placement. Please try again.", @board.place(@ship_1, ["A1", "A2"])
+  end
+
+  def test_for_render
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+    @board.place(@ship, ["A1", "A2", "A3"])
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+    assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n", @board.render(true)
   end
 end

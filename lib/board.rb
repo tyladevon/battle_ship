@@ -48,7 +48,9 @@ class Board
       letters << coordinate.split(//)[0].ord
       nums << coordinate.split(//)[1].to_i
     end
+
     check = array_ordered?(letters, nums)
+
     if ship.length == coordinates.count && check == true
       true
     else
@@ -56,13 +58,27 @@ class Board
     end
   end
 
-  def place(ship, coordinates)
+  def validate_all(ship, coordinates)
     valid = []
+
     coordinates.map do |coordinate|
       valid << valid_coordinate?(coordinate)
     end
 
-    if valid.all? { |coordinate| coordinate == true} == true && valid_placement?(ship, coordinates) == true
+    is_valid_coordinates = valid.all? { |coordinate| coordinate == true}
+    is_valid_placement = valid_placement?(ship, coordinates)
+    doesnt_have_ship = coordinates.find {|coordinate| @cells[coordinate].ship}
+
+    if is_valid_coordinates && is_valid_placement && doesnt_have_ship == nil
+      true
+    else
+      false
+    end
+  end
+
+
+  def place(ship, coordinates)
+    if validate_all(ship, coordinates)
       coordinates.each do |coordinate|
         @cells[coordinate].place_ship(ship)
       end
@@ -70,4 +86,29 @@ class Board
       "Invalid placement. Please try again."
     end
   end
+
+  def grab_cells(default = false)
+    a_cells = "A"
+    @cells.values.each do |cell|
+      a_cells += ' ' + cell.render(default) if cell.coordinate.start_with?("A")
+    end
+    b_cells = "B"
+    @cells.values.each do |cell|
+      b_cells += ' ' + cell.render(default) if cell.coordinate.start_with?("B")
+    end
+    c_cells = "C"
+    @cells.values.each do |cell|
+      c_cells += ' ' + cell.render(default) if cell.coordinate.start_with?("C")
+    end
+    d_cells = "D"
+    @cells.values.each do |cell|
+      d_cells += ' ' + cell.render(default) if cell.coordinate.start_with?("D")
+    end
+    "  1 2 3 4 \n#{a_cells} \n#{b_cells} \n#{c_cells} \n#{d_cells} \n"
+  end
+
+  def render(default = false)
+    grab_cells(default)
+  end
+
 end

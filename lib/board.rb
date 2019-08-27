@@ -67,13 +67,12 @@ class Board
 
     is_valid_coordinates = valid.all? { |coordinate| coordinate == true}
     is_valid_placement = valid_placement?(ship, coordinates)
-    doesnt_have_ship = coordinates.find {|coordinate| @cells[coordinate].ship}
-
-    if is_valid_coordinates && is_valid_placement && doesnt_have_ship == nil
-      true
-    else
-      false
-    end
+    doesnt_have_ship = coordinates.find {|coordinate|
+      if @cells[coordinate]
+        @cells[coordinate].ship
+      end
+    }
+    is_valid_coordinates && is_valid_placement && doesnt_have_ship == nil
   end
 
 

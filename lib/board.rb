@@ -33,7 +33,7 @@ class Board
 
     if checked_array1.count == 1 && checked_array2.count == 1
       false
-    elsif checked_array1[0] == array_1 && checked_array2[0] == array_2
+    elsif checked_array1[0] == array_1 && checked_array2.uniq.count == 1
       true
     elsif checked_array1.uniq.count == 1 && checked_array2[0] == array_2
       true
@@ -78,6 +78,7 @@ class Board
 
   def place(ship, coordinates)
     if validate_all(ship, coordinates)
+      # require 'pry'; binding.pry
       coordinates.each do |coordinate|
         @cells[coordinate].place_ship(ship)
       end

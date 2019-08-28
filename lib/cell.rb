@@ -28,13 +28,13 @@ class Cell
   end
 
   def render(default = false)
-    if default == true &&  @ship != nil
+    if default == true &&  @ship != nil && @fired_upon == false
       "S"
-    elsif default == false && @ship == nil && @fired_upon == true
-      "M"
-    elsif default == false && @ship != nil && @ship.sunk? == true
+    elsif @ship != nil && @ship.sunk? == true
       "X"
-    elsif default == false && @ship != nil && @fired_upon == true
+    elsif @ship == nil && @fired_upon == true
+      "M"
+    elsif @ship != nil && @fired_upon == true
       "H"
     else
       "."

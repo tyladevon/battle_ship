@@ -44,7 +44,8 @@ class Computer
   end
 
   def computer_shot(board)
-    board.cells.values.sample.fire_upon
-    require 'pry'; binding.pry
+    shot = board.cells.values.sample
+    shot.fire_upon
+    shot
   end
 end
